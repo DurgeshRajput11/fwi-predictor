@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>🔥 FWI Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+          * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+            height: 100vh;
+            display: flex;
+            
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(133, 48, 48, 0.1);
+            width: 100%;
+            max-width: 420px;
+            transition: all 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: border 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border: 1px solid #6200ea;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #6200ea, #03dac6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #3700b3, #00bfa5);
+        }
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 FWI Prediction</h1>
+        <form id="predictForm">
+            <input type="text" name="Temperature" placeholder="🌡️ Temperature (°C)" required />
+            <input type="text" name="RH" placeholder="💧 Relative Humidity (%)" required />
+            <input type="text" name="Ws" placeholder="💨 Wind Speed (km/h)" required />
+            <input type="text" name="Rain" placeholder="🌧️ Rainfall (mm)" required />
+            <input type="text" name="FFMC" placeholder="🔥 FFMC Index" required />
+            <input type="text" name="DMC" placeholder="🔥 DMC Index" required />
+            <input type="text" name="ISI" placeholder="🔥 ISI Index" required />
+            <input type="text" name="Classes" placeholder="🧾 Classes" required />
+            <input type="text" name="Region" placeholder="🗺️ Region" required />
+            <button type="submit">🚀 Predict</button>
+        </form>
+
+        <h2 id="result" style="margin-top: 25px; color: #444;"></h2>
+    </div>
+
+    <script>
+        const form = document.getElementById('predictForm');
+        const resultEl = document.getElementById('result');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent normal form submit + page reload
+
+            // Collect form data into JSON
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            try {
+               
+                const response = await fetch('{{ url_for("predict_datapoint") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) throw new Error('Network response not ok');
+
+                const json = await response.json();
+
+                // Show prediction result without reloading page
+                resultEl.textContent = `📈 Prediction: ${json.prediction}`;
+            } catch (error) {
+                resultEl.textContent = '⚠️ Error occurred: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

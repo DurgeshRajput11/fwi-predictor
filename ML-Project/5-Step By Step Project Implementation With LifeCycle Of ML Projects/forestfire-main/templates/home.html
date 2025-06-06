@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔥 Welcome to FWI Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #232323;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #2e2e2e;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 48px 32px 40px 32px;
+      max-width: 600px;
+      width: 95vw;
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 28px 0;
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+    .highlight {
+      background: #1769ff;
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.15em 0.5em;
+      display: inline-block;
+      box-decoration-break: clone;
+      box-shadow: 0 2px 8px rgba(23,105,255,0.12);
+    }
+    p {
+      color: #e0e0e0;
+      font-size: 1.13rem;
+      margin-bottom: 32px;
+      margin-top: 0;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 14px 36px;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #03dac6, #1769ff);
+      color: white;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(44,62,80,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(23,105,255,0.18);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span class="highlight">🔥 Welcome to FWI<br>Predictor</span>
+    </h1>
+    <p>Predict the Fire Weather Index with precision and ease. Let’s keep nature safe with AI!</p>
+    <a href="{{ url_for('index') }}" class="cta-button">🚀 Start Predicting</a>
+  </div>
+</body>
+</html>
