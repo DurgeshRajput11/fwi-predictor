@@ -1,1 +1,1 @@
-# fwi-predictor
+# FWI-Predictor
